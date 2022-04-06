@@ -120,10 +120,14 @@ export default class Time extends Vue {
       .then((r: TimeZoneData) => {
         // Add the selected location to our array
         const duplicateRegion = this.selectedCities.map((c:City) => c.name).some((s:string) => s === r.regionName);
-        if(!duplicateRegion){
+        if(r.regionName){
+          if(!duplicateRegion){
           this.selectedCities.push({ name: r.regionName, timeZone: r.zoneName });
+          }else{
+            console.log("Duplicate!")
+          }
         }else{
-          console.log("Duplicate!")
+          console.log("Invalid time zone! (No ID)");
         }
         
       });
